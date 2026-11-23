@@ -4,7 +4,7 @@ title Installer PixelFTP - Setup Otomatis
 color 0B
 
 echo ================================================================
-echo              INSTALLER PIXELFTP (AKSES FILE WAN)
+echo         INSTALLER PIXELFTP - AKSES FILE LAPTOP
 echo ================================================================
 echo.
 
@@ -42,26 +42,10 @@ echo [2/4] Menyiapkan komponen QR Code...
 :: 3. Salin file aplikasi ke %LOCALAPPDATA%\PixelFTP
 echo [3/4] Memasang file aplikasi ke %INSTALL_DIR%...
 if not exist "%INSTALL_DIR%" mkdir "%INSTALL_DIR%"
-copy /Y "%~dp0server.py" "%INSTALL_DIR%\server.py" >nul
-copy /Y "%~dp0pixelftp.ico" "%INSTALL_DIR%\pixelftp.ico" >nul
-
-> "%INSTALL_DIR%\Run_PixelFTP.bat" (
-    echo @echo off
-    echo chcp 65001 ^>nul
-    echo title PixelFTP - Akses File Jarak Jauh
-    echo color 0A
-    echo echo ================================================================
-    echo echo       PIXELFTP - AKSES FILE JARAK JAUH ^(MODE WAN / INTERNET^)
-    echo echo ================================================================
-    echo echo.
-    echo echo   Mohon tunggu sebentar, sedang menyiapkan QR Code ^& Link...
-    echo echo   ^(Jangan tutup jendela ini selama file masih diakses^)
-    echo echo.
-    echo "%PY_EXE%" -u "%%~dp0server.py" --wan --port 8088
-    echo echo.
-    echo echo   Server telah berhenti.
-    echo pause
-)
+if not exist "%INSTALL_DIR%\server" mkdir "%INSTALL_DIR%\server"
+copy /Y "%~dp0PixelFTP.exe" "%INSTALL_DIR%\PixelFTP.exe" >nul
+copy /Y "%~dp0server.py" "%INSTALL_DIR%\server\server.py" >nul
+copy /Y "%~dp0pixelftp.ico" "%INSTALL_DIR%\server\pixelftp.ico" >nul
 
 :: 4. Buat Shortcut berikon PixelFTP di Desktop & Start Menu
 echo [4/4] Membuat ikon aplikasi PixelFTP di Desktop ^& Start Menu...
@@ -71,9 +55,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command ^
   "$startMenu = Join-Path ([Environment]::GetFolderPath('Programs')) 'PixelFTP.lnk'; " ^
   "foreach ($lnkPath in @((Join-Path $desktop 'PixelFTP.lnk'), $startMenu)) { " ^
   "  $s = $ws.CreateShortcut($lnkPath); " ^
-  "  $s.TargetPath = '%INSTALL_DIR%\Run_PixelFTP.bat'; " ^
+  "  $s.TargetPath = '%INSTALL_DIR%\PixelFTP.exe'; " ^
   "  $s.WorkingDirectory = '%INSTALL_DIR%'; " ^
-  "  $s.IconLocation = '%INSTALL_DIR%\pixelftp.ico,0'; " ^
+  "  $s.IconLocation = '%INSTALL_DIR%\PixelFTP.exe,0'; " ^
   "  $s.Description = 'PixelFTP - Akses File Laptop Jarak Jauh'; " ^
   "  $s.Save(); " ^
   "}"

@@ -717,9 +717,8 @@ def start_wan_tunnel(port, pin):
                 announced = True
                 public_url = match.group(0)
                 print("\n" + "=" * 64)
-                print("  SIAP DIAKSES DARI JARAK JAUH (WAN)")
+                print("  SIAP DIAKSES DARI JARAK JAUH (INTERNET)")
                 print("=" * 64)
-                print(f"  Provider : {provider}")
                 print(f"  LINK     : {public_url}")
                 print(f"  PIN      : {pin}")
                 print("=" * 64)
@@ -728,18 +727,18 @@ def start_wan_tunnel(port, pin):
                     qr = qrcode.QRCode(border=2)
                     qr.add_data(public_url)
                     qr.make(fit=True)
-                    print("  SCAN QR CODE INI:")
+                    print("  SCAN QR CODE INI PAKAI KAMERA HP:")
                     qr.print_ascii(invert=True)
                     print("=" * 64)
                 except Exception:
                     pass
-                print("  UNTUK YANG MEMBANTU DI DEPAN LAPTOP:")
-                print("  1. JANGAN tutup jendela hitam ini.")
-                print("  2. Cukup FOTO layar ini & kirim ke pemilik laptop.")
+                print("  PETUNJUK:")
+                print("  1. JANGAN tutup jendela hitam ini selama file masih diakses.")
+                print("  2. Foto layar ini (QR Code + PIN) dan kirim ke pemilik laptop.")
                 print("=" * 64 + "\n")
                 sys.stdout.flush()
         if not announced:
-            print("\n[WAN Error] Gagal membuat link tunnel WAN. Detail terakhir:")
+            print("\n[Gagal] Tidak bisa membuat link akses internet. Detail:")
             for l in recent_lines:
                 print(f"  > {l}")
             print("[Tips] Pastikan laptop terhubung ke internet.\n")
@@ -775,22 +774,22 @@ def main():
         start_udp_beacon(local_ip, PORT)
 
     print("=" * 64)
-    print("        PIXELSHARE / PIXELFTP - SERVER LAPTOP")
+    print("               PIXELFTP - AKSES FILE LAPTOP")
     print("=" * 64)
-    print(f"  Alamat Lokal : http://{local_ip}:{PORT}")
-    print(f"  Hostname     : {socket.gethostname()}")
-    print(f"  User         : {getpass.getuser()}")
+    print(f"  Laptop   : {socket.gethostname()} ({getpass.getuser()})")
+    if not args.wan:
+        print(f"  Link WiFi: http://{local_ip}:{PORT}")
     if REQUIRED_PIN:
-        print(f"  PIN Akses    : {REQUIRED_PIN}")
+        print(f"  PIN Akses: {REQUIRED_PIN}")
     print("=" * 64)
 
     tunnel_proc = None
     if args.wan:
-        print("  Menghubungkan ke internet (WAN Tunnel)... Mohon tunggu sebentar...\n")
+        print("  Sedang menyiapkan link akses internet... Mohon tunggu sebentar...\n")
         tunnel_proc = start_wan_tunnel(PORT, REQUIRED_PIN)
     else:
-        print("  Status       : AKTIF (Mode LAN / Wi-Fi Lokal)")
-        print("  Tekan Ctrl + C di terminal ini untuk berhenti.\n")
+        print("  Status   : AKTIF (Siap diakses lewat Wi-Fi yang sama)")
+        print("  Tutup jendela ini jika sudah selesai.\n")
 
     try:
         httpd.serve_forever()
