@@ -39,7 +39,7 @@
   ```
   atau via terminal:
   ```bash
-  python server_laptop/server.py --wan --port 8088
+  python server/server.py --wan --port 8088
   ```
 * **Mode LAN (Wi-Fi Lokal untuk Aplikasi Android):**
   ```bat
@@ -47,7 +47,7 @@
   ```
   atau via terminal:
   ```bash
-  python server_laptop/server.py
+  python server/server.py
   ```
 
 ---
@@ -56,18 +56,19 @@
 
 ```text
 PixelFTP/
-├── app/                        # Proyek aplikasi Android (Kotlin / Gradle)
-├── server_laptop/
+├── android/                    # Proyek aplikasi Android (Kotlin / Gradle)
+├── server/
 │   ├── server.py               # Server HTTP multi-thread (LAN + WAN + Web UI + PIN + QR)
 │   └── pixelftp.ico            # Ikon aplikasi PixelFTP
-├── Installer_PixelFTP/
+├── installer/
 │   ├── Install_PixelFTP.bat    # Installer otomatis (Python, qrcode, shortcut Desktop)
 │   ├── server.py               # Salinan server untuk paket installer
 │   ├── pixelftp.ico            # Ikon shortcut Desktop
 │   └── BACA_SAYA.txt           # Panduan singkat
+├── dist/
+│   └── PixelFTP_Installer.zip  # Paket installer siap kirim
 ├── Bagi_File_ke_HP.bat         # Launcher cepat mode LAN
 ├── Klik_Untuk_Akses_WAN.bat    # Launcher cepat mode WAN (1-Klik)
-├── PixelFTP_Installer.zip      # Paket installer siap kirim
 └── README.md
 ```
 

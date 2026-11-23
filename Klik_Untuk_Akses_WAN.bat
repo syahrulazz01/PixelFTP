@@ -11,7 +11,7 @@ echo   Mohon tunggu sebentar, sedang menyiapkan link akses...
 echo   (Jangan tutup jendela ini selama file masih diakses)
 echo.
 
-python -u "%~dp0server_laptop\server.py" --wan --port 8088
+python -u "%~dp0server\server.py" --wan --port 8088
 
 echo.
 echo   Server telah berhenti.

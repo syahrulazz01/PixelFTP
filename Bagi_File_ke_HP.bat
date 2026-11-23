@@ -23,6 +23,6 @@ if %errorlevel% equ 0 (
 )
 
 echo Menjalankan server...
-python -u "%~dp0server_laptop\server.py"
+python -u "%~dp0server\server.py"
 
 pause
