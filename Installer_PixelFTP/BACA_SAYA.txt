@@ -1,0 +1,6 @@
+CARA PASANG PIXELFTP (CUMA SEKALI SAJA):
+1. Ekstrak folder ini (klik kanan -> Extract All).
+2. Klik ganda file "Install_PixelFTP.bat" dan tunggu sampai selesai.
+3. Setelah selesai, ikon "PixelFTP" akan muncul di Desktop.
+4. Untuk mulai berbagi file, cukup klik ganda ikon "PixelFTP" di Desktop,
+   lalu foto QR Code + PIN yang muncul di layar.
